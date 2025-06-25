@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>File Compressor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="file"],
+    select,
+    button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #2575fc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1a5fd0;
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    #log {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #333;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Compress / Decompress File</h2>
+    <form id="uploadForm">
+      <input type="file" name="file" required />
+      <select name="operation" required>
+        <option value="">-- Select Operation --</option>
+        <option value="compress">Compress</option>
+        <option value="decompress">Decompress</option>
+      </select>
+      <select name="algorithm" required>
+        <option value="">-- Select Algorithm --</option>
+        <option value="auto">Auto Detect</option>
+        <option value="huffman">Huffman</option>
+        <option value="lz77">LZ77</option>
+        <option value="rle">RLE</option>
+        <option value="deflate">Deflate</option>
+      </select>
+      <button type="submit">Submit</button>
+      <div id="status"></div>
+    </form>
+    <div id="log"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const status = document.getElementById('status');
+    const log = document.getElementById('log');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.innerText = "Processing...";
+      log.innerText = "";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/process', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+          status.innerText = "❌ Error: " + (data.error || "Unknown error.");
+          return;
+        }
+
+        // Convert file data to Blob and download
+        const byteArray = new Uint8Array(data.file_data);
+        const blob = new Blob([byteArray], { type: 'application/octet-stream' });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = data.filename;
+        link.click();
+
+        status.innerText = `✅ ${data.operation === 'compress' ? 'Compressed' : 'Decompressed'} successfully!`;
+
+        const originalKB = (data.original_size / 1024).toFixed(2);
+        const processedKB = (data.processed_size / 1024).toFixed(2);
+        let message = `📄 Original Size: ${originalKB} KB\n📂 Processed Size: ${processedKB} KB`;
+
+        if (data.operation === 'compress') {
+          message += `\n📉 Compression Ratio: ${data.compression_ratio}%`;
+        }
+
+        message += `\n⏱️ Time Taken: ${data.processing_time} sec`;
+
+        log.innerText = message;
+
+      } catch (err) {
+        console.error(err);
+        status.innerText = "❌ Failed to process file.";
+      }
+    });
+  </script>
+</body>
+</html>
