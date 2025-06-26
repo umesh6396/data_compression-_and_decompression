@@ -6,7 +6,7 @@ This is a simple yet powerful web application built with **Flask** that allows u
 ---
 
 ## 📁 Project Structure
-
+```
 project_root/
 │
 ├── app.py # Main Flask app with backend logic
@@ -15,6 +15,7 @@ project_root/
 ├── templates/
 │ └── index.html # Frontend HTML template
 └── README.md # Project documentation (this file)
+```
 
 ```ruby
 
