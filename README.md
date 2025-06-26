@@ -16,9 +16,8 @@ project_root/
 │ └── index.html # Frontend HTML template
 └── README.md # Project documentation (this file)
 
-ruby
-Copy
-Edit
+```ruby
+
 
 ---
 
@@ -30,7 +29,7 @@ Edit
 - 📦 Built-in support for multiple custom and standard algorithms
 - 📊 Displays compression ratio, time taken, and file sizes
 - 💡 Modern UI with simple and intuitive user interface
-
+```
 ---
 
 ## 🧠 Supported Algorithms
@@ -55,23 +54,23 @@ Edit
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
+```
 2. Set Up Virtual Environment (Recommended)
-bash
-Copy
-Edit
+
+```bash
 python -m venv venv
 source venv/bin/activate    # Windows: venv\Scripts\activate
-3. Install Dependencies
-bash
-Copy
-Edit
+```
+4. Install Dependencies
+```bash
 pip install flask flask-cors
-4. Run the App
+```
+5. Run the App
+```
 bash
-Copy
-Edit
 python app.py
 Visit the app at: http://127.0.0.1:5000
+```
 
 🌐 Web Interface
 The UI provides:
@@ -100,19 +99,17 @@ algorithm: (optional) "auto", "huffman", "lz77", etc.
 
 GET /health
 Returns:
-
+```
 json
-Copy
-Edit
 {
   "status": "ok",
   "supported_algorithms": [...],
   "version": "5.0-refactored"
 }
+```
 📄 Example Response
+```
 json
-Copy
-Edit
 {
   "success": true,
   "operation": "compress",
@@ -124,17 +121,13 @@ Edit
   "filename": "example_huffman.compressed",
   "file_data": [...]
 }
+```
 👨‍💻 Author
-Made with ❤️ by Your Name
+Made with ❤️ by Umesh
 Feel free to contribute or report issues.
 
-📝 License
-MIT License
-You are free to use, modify, and distribute this project.
-
+```
 yaml
-Copy
-Edit
 
 ---
 
@@ -143,3 +136,4 @@ Edit
 - Deploy to **Render**, **PythonAnywhere**, or **Heroku**
 - Add screenshot previews
 - Support drag-and-drop UI or file history
+```
