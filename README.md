@@ -54,7 +54,7 @@ project_root/
 
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+cd file_compression_decompression 
 ```
 2. Set Up Virtual Environment (Recommended)
 
