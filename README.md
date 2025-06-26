@@ -143,5 +143,3 @@ Edit
 - Deploy to **Render**, **PythonAnywhere**, or **Heroku**
 - Add screenshot previews
 - Support drag-and-drop UI or file history
-
-Let me know if you'd like a GitHub-ready version with your actual repo URL, name, or author profile!
