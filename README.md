@@ -66,6 +66,10 @@ source venv/bin/activate    # Windows: venv\Scripts\activate
 ```bash
 pip install flask flask-cors
 ```
+or
+```bash
+pip install requirements.txt
+```
 5. Run the App
 ```
 bash
@@ -127,14 +131,3 @@ json
 Made with ❤️ by Umesh
 Feel free to contribute or report issues.
 
-```
-yaml
-
----
-
-### ✅ Next Steps (Optional Enhancements)
-- Add `requirements.txt`
-- Deploy to **Render**, **PythonAnywhere**, or **Heroku**
-- Add screenshot previews
-- Support drag-and-drop UI or file history
-```
